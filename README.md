@@ -22,18 +22,29 @@ NPM 6.14
 Nodejs 12.22
 MS Windows 10
 
-How this project was setup
+## Installing this project
+
+git clone <SSH><USER><URL>
+php artisan migrate
+php artisan db:seed --class=ShiftTypesSeeder
+OR
+php artisan migrate:fresh --seed --seeder=ShiftTypesSeeder
+
+## How this project was setup
 
 composer create-project --prefer-dist laravel/laravel shift-scheduling
 composer require laravel/ui
 php artisan ui bootstrap --auth
 npm install && npm run dev
-php arisan storage:link
+php artisan storage:link
 
 Note: post install message
 C:\Users\nasbo\AppData\Roaming\npm-cache_logs\2022-11-26T02_23_56_425Z-debug.log
 
 Folder storage should be allowed to write. Where higher folder security is applied such as SELINUX, then this needs to be allowed.
+
+php artisan make:seeder DefaultUsersSeeder
+php artisan make:seeder DefaultTypesSeeder
 
 # Update .env with database details
 

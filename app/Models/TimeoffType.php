@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class TimeoffType extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+        'description',
+        'options',
+        'updated_at',
+        'created_at'
+    ];
 }
