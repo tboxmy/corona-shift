@@ -1,1 +1,3 @@
-require('./bootstrap');
+require("./bootstrap");
+
+$(".datepicker").datepicker();

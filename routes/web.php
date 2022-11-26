@@ -19,6 +19,9 @@ Route::get('/', function () {
 Route::get('/events/1', function () {
     return view('events.index0');
 });
+Route::get('/events/2', function () {
+    return view('events.index2');
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

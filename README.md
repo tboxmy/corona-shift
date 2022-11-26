@@ -36,6 +36,7 @@ composer create-project --prefer-dist laravel/laravel shift-scheduling
 composer require laravel/ui
 php artisan ui bootstrap --auth
 npm install bootstrap@latest @popperjs/core --save-dev
+npm install jquery jquery-ui --save-dev
 npm install && npm run dev
 php artisan storage:link
 
