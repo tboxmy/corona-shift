@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DepartmentUsers;
 use App\Models\Shift;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
@@ -87,11 +88,27 @@ class ShiftController extends Controller
         //
     }
 
-    public function getshifts(Request $request)
+    public function getShifts(Request $request)
+    {
+    }
+    public function getDepartmentUsers(Request $request)
     {
         // Ajax calls
-        $users = DepartmentUsers::where('is_shift', true)->get();
-        $json_data = ['data'=>$users];
+        $dept=$request->dept??null;
+        if ($dept==null) {
+            return null;
+        }
+
+        $shifts = DepartmentUsers::where('is_shift', true)->where('code', $request->dept)
+        ->get()->pluck('user_id');
+        $shiftUsers = DepartmentUsers::where('is_shift', true)
+        ->whereIn('user_id', $shifts)
+        ->join('users', 'department_users.user_id', '=', 'users.id')
+        ->orderBy('users.name')
+        ->get(['department_users.code as dept','users.id as id','users.name as name']);
+
+        // $users = User::whereIn('id', $shiftUsers)->get();
+        $json_data = ['data'=>$shiftUsers];
         Log::debug('Received request');
         Log::debug($request);
         return response(json_encode($json_data), 200);

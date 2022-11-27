@@ -55,7 +55,7 @@
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                     Templates:
                                     <ol>
-                                        <li><a href="/events/1">Calendar with CSS and JS</a>
+                                        <li><a href="/events/1">Calendar with CSS, jQuery and JS</a>
                                         <li><a href="/events/2">Staff shift listing CSS and JS</a>
                                     </ol>
                                 </div>
