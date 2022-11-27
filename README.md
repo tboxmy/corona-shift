@@ -29,7 +29,7 @@ php artisan migrate
 php artisan db:seed --class=ShiftTypesSeeder
 OR
 php artisan migrate:fresh --seed --seeder=ShiftTypesSeeder
-hp artisan db:seed --class=DefaultDepartmentUserSeeder
+php artisan db:seed --class=DefaultDepartmentUserSeeder
 
 ## How this project was setup
 
@@ -38,7 +38,7 @@ composer require laravel/ui
 php artisan ui bootstrap --auth
 npm install bootstrap@latest @popperjs/core --save-dev
 npm install jquery jquery-ui --save-dev
-npm install moment
+npm install dateFns
 npm install && npm run dev
 php artisan storage:link
 
