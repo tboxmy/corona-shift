@@ -71,6 +71,8 @@
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                     A collection of notes for software development. Prefect for the beginner devops, which includes PHP, MySQL, MariaDB, Postgresql, Linux.
+                                    <br><a href="https://www.npmjs.com/package/date-fns">date-fns</a>
+                                    <br><a href="https://devhints.io/moment">Moment quick</a>
                                 </div>
                             </div>
                         </div>

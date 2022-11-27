@@ -38,6 +38,7 @@ composer require laravel/ui
 php artisan ui bootstrap --auth
 npm install bootstrap@latest @popperjs/core --save-dev
 npm install jquery jquery-ui --save-dev
+npm install moment
 npm install && npm run dev
 php artisan storage:link
 
@@ -47,6 +48,7 @@ C:\Users\nasbo\AppData\Roaming\npm-cache_logs\2022-11-26T02_23_56_425Z-debug.log
 Folder storage should be allowed to write. Where higher folder security is applied such as SELINUX, then this needs to be allowed.
 
 Example of php artisan used;
+php artisan make:model ShiftUser -mcr
 php artisan make:model DepartmentUsers -mcr
 php artisan make:seeder DefaultUsersSeeder
 php artisan make:seeder DefaultTypesSeeder

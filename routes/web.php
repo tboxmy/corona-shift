@@ -27,3 +27,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/departmentStaff', [App\Http\Controllers\ShiftController::class, 'getDepartmentUsers'])->name('getDepartmentUsers');
 Route::post('/events/getShifts', [App\Http\Controllers\ShiftController::class, 'getShifts'])->name('getShifts');
+Route::post('/events/getUserShifts', [App\Http\Controllers\ShiftUserController::class, 'getShiftByUserDate'])->name('getUserShifts');
