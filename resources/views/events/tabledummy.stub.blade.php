@@ -26,14 +26,14 @@
       <td id="col8"></td>
     </tr>
     <tr>
-      <td id="col9" scope="row">#2</td>
-      <td id="col10"></td>
-      <td id="col11"></td>
-      <td id="col12"></td>
-      <td id="col13"></td>
-      <td id="col14"></td>
-      <td id="col15"></td>
-      <td id="col16"></td>
+      <td scope="row">#2</td>
+      <td class="table-primary">AM shift</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="table-primary">AM shift</td>
+      <td class="table-primary">AM shift</td>
+      <td></td>
     </tr>
     <tr>
       <td scope="row">#3</td>
@@ -46,6 +46,36 @@
       <td></td>
 
     </tr>
-    
+    <tr>
+      <td class="border table-info" scope="row" rowspan="3">NURUL</td>
+      <td>#1</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td scope="row">#2</td>
+      <td></td>
+      <td class="table-primary">AM shift</td>
+      <td class="table-primary">AM shift</td>
+      <td class="table-primary">AM shift</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td scope="row">#3</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
   </tbody>
 </table>

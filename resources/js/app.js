@@ -1,3 +1,3 @@
 require("./bootstrap");
 
-$(".datepicker").datepicker();
+// $(".datepicker").datepicker();

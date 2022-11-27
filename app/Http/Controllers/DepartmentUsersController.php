@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\DepartmentUsers;
-use App\Models\Shift;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
-use Response;
-
-class ShiftController extends Controller
+class DepartmentUsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -45,10 +41,10 @@ class ShiftController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Shift  $shift
+     * @param  \App\Models\DepartmentUsers  $departmentUsers
      * @return \Illuminate\Http\Response
      */
-    public function show(Shift $shift)
+    public function show(DepartmentUsers $departmentUsers)
     {
         //
     }
@@ -56,10 +52,10 @@ class ShiftController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Shift  $shift
+     * @param  \App\Models\DepartmentUsers  $departmentUsers
      * @return \Illuminate\Http\Response
      */
-    public function edit(Shift $shift)
+    public function edit(DepartmentUsers $departmentUsers)
     {
         //
     }
@@ -68,10 +64,10 @@ class ShiftController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Shift  $shift
+     * @param  \App\Models\DepartmentUsers  $departmentUsers
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Shift $shift)
+    public function update(Request $request, DepartmentUsers $departmentUsers)
     {
         //
     }
@@ -79,23 +75,11 @@ class ShiftController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Shift  $shift
+     * @param  \App\Models\DepartmentUsers  $departmentUsers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shift $shift)
+    public function destroy(DepartmentUsers $departmentUsers)
     {
         //
-    }
-
-    public function getshifts(Request $request)
-    {
-        // Ajax calls
-        $users = DepartmentUsers::where('is_shift', true)->get();
-        $json_data = ['data'=>$users];
-        Log::debug('Received request');
-        Log::debug($request);
-        return response(json_encode($json_data), 200);
-
-        // return response(json_encode(['message'=>'failed']), 400);
     }
 }

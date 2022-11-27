@@ -29,6 +29,7 @@ php artisan migrate
 php artisan db:seed --class=ShiftTypesSeeder
 OR
 php artisan migrate:fresh --seed --seeder=ShiftTypesSeeder
+hp artisan db:seed --class=DefaultDepartmentUserSeeder
 
 ## How this project was setup
 
@@ -45,6 +46,8 @@ C:\Users\nasbo\AppData\Roaming\npm-cache_logs\2022-11-26T02_23_56_425Z-debug.log
 
 Folder storage should be allowed to write. Where higher folder security is applied such as SELINUX, then this needs to be allowed.
 
+Example of php artisan used;
+php artisan make:model DepartmentUsers -mcr
 php artisan make:seeder DefaultUsersSeeder
 php artisan make:seeder DefaultTypesSeeder
 
