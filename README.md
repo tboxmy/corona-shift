@@ -83,7 +83,7 @@ php artisan make:seeder DefaultTypesSeeder
 DB Configuration with Postgresql
 
 ```
-DB_CONNECTION=mysql
+DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
 DB_DATABASE=scheduling
@@ -92,6 +92,8 @@ DB_PASSWORD=postgres
 ```
 
 ## Bootstrap
+
+Installed using Laravel mix
 
 ```
 npm install bootstrap
