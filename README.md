@@ -8,19 +8,27 @@ Corona Shift project provides a design framework to manage shift scheduling that
 
 ## What
 
-This project provide the base components to handle planning of employee shift schedule. This includes
+This project provide the base components to handle planning of employee shift schedule. The framework is best described by the database structure, while the application demonstrates how the database is used. This includes;
 
 -   Manage shift schedules manually
 -   Manage employee assignment to shifts base on department
 -   Manage special occassions, such as holidays and special event days
 -   Manage shift rules
--   Manage employee constraints for shift assignment. This include user time off
+-   Manage employee constraints for shift assignment. This include user time off, selecting employee based on skills they are good at.
+
+Flexibility of this framework allows scheduling for different organisation needs. Such as rotating shifts, DuPont shifts, Pitman (2-3-2) schedule, 4on-4off schedule, graveyard shifts and events based shift.
+
+Anyone who can relate to the database, will be able to reproduce this framework in any programming language.
 
 ## Why
 
 As more organisations get involved in managing employee schedules, a standard method to establish employee duty hours that is flexible will provide quicker updates to those invloved.
 
+Having a established a shift schedule approach will benefit any organisation. It is an important step that dictates much of the people management and resource planning process.
+
 Why Laravel? It my personal choice at this moment. This will allow the application to be quickly deployed as a web application, or backend API, or single page application (SPA), or component for Laravel projects.
+
+Through this framework, it can be easily extended to automated shift scheduling systems.
 
 ## Project setup
 
