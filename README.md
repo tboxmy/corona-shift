@@ -65,7 +65,7 @@ php artisan storage:link
 ```
 
 Note: post install message
-C:\Users\nasbo\AppData\Roaming\npm-cache_logs\2022-11-26T02_23_56_425Z-debug.log
+C:\Users\tboxmy\AppData\Roaming\npm-cache_logs\2022-11-26T02_23_56_425Z-debug.log
 
 Folder storage should be allowed to write. Where higher folder security is applied such as SELINUX, then this needs to be allowed.
 
