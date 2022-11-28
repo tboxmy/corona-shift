@@ -17,7 +17,7 @@ class DefaultUsersSeeder extends Seeder
     public function run()
     {
         //
-        //Timeoff Types
+        // Users
         $users = [['admin','admin@localhost','administator']
         ,['user01','user01@localhost','user1']
         ,['user02','user02@localhost','user2']

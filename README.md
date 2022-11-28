@@ -4,7 +4,7 @@
 
 Corona Shift project provides a design framework to manage shift scheduling that leverage on Laravel programming environment.
 
-Any contribution to help review and identify available shift frameworks to be implemented.
+![Screenshot](screenshot-initialtable.PNG)
 
 ## Project setup
 
