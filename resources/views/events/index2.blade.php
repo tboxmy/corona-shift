@@ -28,6 +28,15 @@
     function startup() {
         getSchedule();
     }
+
+    function askTitle() {
+        let choice = prompt("Please enter event title", "Task");
+        if (choice != null) {
+            // document.getElementById("demo").innerHTML =
+            // "WOW " + choice + "! your choice is too good !!";
+            alert("WOW " + choice + "! your choice is too good !!");
+        }
+    }
     function getSchedule() {
         let url = "/departmentStaff";
         // var month = today.getMonth()+1;
@@ -83,10 +92,12 @@
                 namecel.className = "border";
                 namecel.rowSpan = "2";
             }
-            if(i==2 || i==3){
+            if(i==2 || i==3 || i==4 || i==5 | i==6 | i==7 | i==8){
+                var namecel = document.getElementById(item.id+cellId);
                 // Example of shift
                 // cell.className = "table-primary";             
                 // cell.innerHTML = '12Hrs<br>08:00';
+                cell.setAttribute("onclick","askTitle();");
             }
         }
         var startRow = i;
@@ -162,7 +173,6 @@
 
     function getShifts(user_id) {
         let url = "/events/getUserShifts";
-        
         let messages = {        
         user_id: user_id,
         }
@@ -212,6 +222,10 @@
                 row=document.getElementById(cellId);
                 row.innerHTML=shift_name+"<br><span class='small'>["+shortTime(cursorDate)+"]</span>";
                 row.className = "table-primary";
+                row.removeAttribute("onclick");
+                // row.addEventListener('click', (event) => {
+                //     event.target.remove();
+                // });
                 
             }
         }        

@@ -16,7 +16,7 @@
     <tr style="display:none;">
       <td id="col0" class="border" scope="row" rowspan="3">Alex</td>
       <td id="col1">#1</td>
-      <td id="col2">[+]</td>
+      <td id="col2" onclick="askTitle()">[+]</td>
       <td id="col3">[+]</td>
       <td id="col4">[+]</td>
       <td id="col5">[+]</td>
