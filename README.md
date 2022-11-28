@@ -14,7 +14,7 @@ This project provide the base components to handle planning of employee shift sc
 -   Manage employee assignment to shifts base on department
 -   Manage special occassions, such as holidays and special event days
 -   Manage shift rules
--   Manage employee constraints for shift assignment. This include user time off, selecting employee based on skills they are good at.
+-   Manage employee constraints for shift assignment. This include user time off, selecting employee based on skills they are good at, local regulation on number of working hours.
 
 Flexibility of this framework allows scheduling for different organisation needs. Such as rotating shifts, DuPont shifts, Pitman (2-3-2) schedule, 4on-4off schedule, graveyard shifts and events based shift.
 
