@@ -54,6 +54,14 @@
             alert("WOW " + choice + "! your choice is too good !!");
         }
     }
+    function askEditEvent() {
+        let choice = prompt("Lets edit the event", "EDIT EVENT");
+        if (choice != null) {
+            // document.getElementById("demo").innerHTML =
+            // "WOW " + choice + "! your choice is too good !!";
+            alert("DONE! " + choice + " is updated !!");
+        }
+    }
     function getSchedule() {
         let url = "/departmentStaff";
         // var month = today.getMonth()+1;
@@ -254,27 +262,19 @@
         today = dateFns.startOfDay(startDate);
         let abc = new Date();
         console.log(dateFns.format(today, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"));
-        // console.log('date-fns = ' );
         for(i=0; i<7; i++){
             let itemDate = dateFns.addDays(today,i);
-            // itemDate.setDate(itemDate.getDate() + i);
             cursorDate = currentDate(shift_start);
             console.log('Process = '+itemDate+' AND '+cursorDate);
             console.log('dateFns = '+dateFns.differenceInDays(itemDate, cursorDate));            
             if(itemDate.getDate() == cursorDate.getDate() ) {
-                // let cellId = 'headerDate';
-                // cellId += (i+1);
                 console.log('use '+cursorDate);
-                let cellId=user_id+'cell'+(i+2);
-                // displayDates[i]=itemDate;                 
+                let cellId=user_id+'cell'+(i+2);              
                 row=document.getElementById(cellId);
                 row.innerHTML=shift_name+"<br><span class='small'>["+shortTime(cursorDate)+"]</span>";
                 row.className = "table-primary";
                 row.removeAttribute("onclick");
-                // row.addEventListener('click', (event) => {
-                //     event.target.remove();
-                // });
-                
+                row.setAttribute("onclick","askEditEvent();");
             }
         }        
     }
