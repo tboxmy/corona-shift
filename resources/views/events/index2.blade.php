@@ -13,17 +13,34 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    [<<]<span id="currentDate"></span>[>>]
+                    View by week <span id="prevDate" onclick="prevDate()">[<<]</span><span id="currentDate"></span><span id="nextDate" onclick="nextDate()">[>>]</span>
                     @include('events.tablestub')
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    Schedule display as in database. AL is example of where the user timeoff is displayed.
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    Notes: Places screen notes here.
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<script>
-    window.onload = startup();
+<script>    
     var today = null;
     var displayDates = null;
+    var startDate = dateFns.startOfDay(dateFns.subDays(new Date(), 1)); // minus  day for demo purpose
+    window.onload = startup();
 
     function startup() {
         getSchedule();
@@ -42,12 +59,15 @@
         // var month = today.getMonth()+1;
         // var day = today.getDay();
         today = shortDate();
-        updateTableNav(); 
+        console.log('schedule '+startDate);
+        // let start = dateFns.startOfDay(dateFns.subDays(new Date(), 1));
+        updateTableNav(startDate); 
         let messages = {
         id:1,
         title: 'Title info',
         body: 'This is the content',
         dept: 'hq',
+        start: startDate,
         }
         let data = JSON.stringify(messages);
         fetch(url, {            
@@ -66,7 +86,7 @@
                 data.data.forEach(function(item){
                     // console.log(item);
                     addRows(item);
-                    getShifts(item.id);
+                    getShifts(item.id, startDate);
                 });                       
         }).catch((error)=> {
             console.log('Post Error');
@@ -110,7 +130,7 @@
             var copycel=document.getElementById('col'+ (i+startRow)).innerHTML;
             // cell.innerHTML=copycel;
             cell.id = item.id+cellId;
-            if(i==3){
+            if(i==1){
                 // Example of timeoff
                 cell.className = "table-info";             
                 cell.innerHTML = 'AL';
@@ -152,29 +172,36 @@
         return currentDateTime;
     }
 
-    function updateTableNav(startDate=null){        
+    function updateTableNav(start=null){        
         let row=document.getElementById('currentDate');
-        row.innerHTML=' ['+shortDate()+'] ';
         // today = currentDate();
-        today = currentDate();
+        if(start==null){
+            start = currentDate();
+        }
+        row.innerHTML=' ['+shortDate(start)+'] ';
         
         displayDates = new Array();
         for(i=0; i<7; i++){
-            let itemDate = dateFns.addDays(today,i);            
+            let itemDate = dateFns.addDays(start,i);            
             // itemDate.setDate(today.getDate() + i);
             let cellId = 'headerDate';
             cellId += (i+1);
             displayDates[i]=itemDate;
             row=document.getElementById(cellId);
             row.innerHTML="Day "+(i+1)+"<br><span class='small'>"+shortDate(itemDate)+"</span>";
-            console.log(i+' - '+itemDate)
+            // console.log(i+' - '+itemDate)
         }
     }
 
-    function getShifts(user_id) {
+    function getShifts(user_id, start=null) {
         let url = "/events/getUserShifts";
+        if(start==null){
+            console.log('#1');
+            start = currentDate();
+        }
         let messages = {        
         user_id: user_id,
+        startDate: start,
         }
         let data = JSON.stringify(messages);
         fetch(url, {            
@@ -198,12 +225,33 @@
             console.log('Post Error');
             console.log(error);
         })
-    };
+    }
+
+    function prevDate(){
+        startDate = dateFns.startOfDay(dateFns.subDays(startDate, 7));
+        var cel=document.getElementById('currentDate').innerHTML;  
+        cel=shortDate(startDate);
+        initTableShifts();
+        getSchedule();
+    }
+    function nextDate(){
+        startDate = dateFns.startOfDay(dateFns.addDays(startDate, 7));
+        var cel=document.getElementById('currentDate').innerHTML;  
+        cel=shortDate(startDate);
+        initTableShifts();
+        getSchedule();
+    }
+
+    function initTableShifts(){
+        let table=document.getElementById('employee');
+        for(var i = 3;i<table.rows.length;){
+            table.deleteRow(i);
+        }
+    }
     
     function updateUserShiftRow(user_id,shift_name,shift_start,shift_end){
-        // determine the dates to process
-        today = currentDate();
-        today = dateFns.startOfDay(today);
+        // determine the dates to process        
+        today = dateFns.startOfDay(startDate);
         let abc = new Date();
         console.log(dateFns.format(today, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"));
         // console.log('date-fns = ' );

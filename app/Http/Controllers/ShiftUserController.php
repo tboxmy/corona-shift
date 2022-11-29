@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ShiftUser;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
@@ -84,15 +85,22 @@ class ShiftUserController extends Controller
     {
         //
     }
-    protected function getShift($userId=null, $start=null)
+    protected function getShift($userId=null, $days=1, $start=null)
     {
         //
         $user = User::find($userId);
+        if ($user==null) {
+            return null;
+        }
         $userShifts = ShiftUser::where('user_id', $user->id)
         ->join('users', 'shift_users.user_id', '=', 'users.id')
         ->join('shifts', 'shift_users.shift_id', '=', 'shifts.id')
-        ->join('shift_types', 'shifts.shift_type_id', '=', 'shift_types.id')
-        ->orderBy('shifts.start')
+        ->join('shift_types', 'shifts.shift_type_id', '=', 'shift_types.id');
+        if ($start != null) {
+            $startDate=Carbon::parse($start);
+            $userShifts = $userShifts->where('start', '>=', $startDate);
+        }
+        $userShifts = $userShifts->orderBy('shifts.start')
         ->get(['shift_users.*','users.id as id','users.name as name'
         ,'shifts.name as shift_name','shifts.start as shift_start','shifts.end as shift_end'
         ,'shift_types.name as shift_type']);
@@ -104,6 +112,16 @@ class ShiftUserController extends Controller
     {
         // Ajax call
         $userId=$request->user_id??null;
+        $results = null;
+        $days = $request->days??7;
+        $startDate = $request->startDate??null;
+        if ($startDate != null) {
+            Log::debug('#1 '.$startDate);
+            $results = $this->getShift($userId, $days, $startDate);
+        } else {
+            Log::debug('#2');
+            $results = $this->getShift($userId, $days);
+        }
 
         $results = $this->getShift($userId);
         $json_data = [
