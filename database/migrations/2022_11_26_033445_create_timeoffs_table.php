@@ -17,7 +17,8 @@ class CreateTimeoffsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->integer('timeoff_type_id')->nullable();
+            $table->integer('timeoff_type_id');
+            $table->integer('user_id')->nullable();
             $table->date('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('created_by')->nullable();
             $table->timestamps();
