@@ -51,7 +51,7 @@ Notes:
 ```
 git clone <SSH><USER><URL>
 php artisan migrate
-php artisan db:seed --class=DefaultUserSeeder
+php artisan db:seed --class=DefaultUsersSeeder
 php artisan db:seed --class=DefaultTypesSeeder
 OR
 php artisan migrate:fresh --seed --seeder=DefaultTypesSeeder

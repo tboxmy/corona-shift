@@ -23,7 +23,6 @@ class DefaultDepartmentUserSeeder extends Seeder
         foreach ($users as $item) {
             $user = User::where('email', $item[1])->first();
             if ($user!=null) {
-                print_r($user);
                 DepartmentUsers::create(
                     ['code'=>$item[0],
                     'user_id'=>$user->id,

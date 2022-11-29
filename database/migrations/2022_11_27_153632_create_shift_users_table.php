@@ -23,6 +23,7 @@ class CreateShiftUsersTable extends Migration
             $table->integer('published_by')->nullable();
             $table->jsonb('options')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

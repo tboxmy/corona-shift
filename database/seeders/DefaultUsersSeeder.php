@@ -21,6 +21,7 @@ class DefaultUsersSeeder extends Seeder
         $users = [['admin','admin@localhost','administator']
         ,['user01','user01@localhost','user1']
         ,['user02','user02@localhost','user2']
+        ,['user03','user03@localhost','user3']
         ];
         foreach ($users as $item) {
             User::create(

@@ -24,6 +24,8 @@ class CreateShiftsTable extends Migration
             $table->timestamp('end')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->jsonb('options')->nullable();
             $table->timestamps();
+
+            $table->foreign('shift_type_id')->references('id')->on('shift_types')->onDelete('cascade');
         });
     }
 
