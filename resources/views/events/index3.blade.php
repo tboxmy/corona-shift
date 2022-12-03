@@ -55,7 +55,10 @@
     var users = ["Alex","Andy","Alice","Nich"];
     var item1 = ["Mon",users];
     var item2 = ["Tue",users];    
-    let items = [item1, item2];
+    var item3 = ["Wed",users];
+    var item4 = ["Thu",users];   
+    var item5 = ["Fri",users];
+    let items = [item1, item2, item3, item4, item5];
     window.onload = startup();
 
     function startup() {
@@ -360,6 +363,10 @@
         addHourRows();
         addRows(items[0]);
         addRows(items[1]);
+        addRows(items[2]);
+        addRows(items[3]);
+        addRows(items[4]);
+
     }
     function initTableShifts(){
         let table=document.getElementById('department');
