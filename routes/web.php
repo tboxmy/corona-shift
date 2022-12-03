@@ -19,8 +19,11 @@ Route::get('/', function () {
 Route::get('/events/1', function () {
     return view('events.index0');
 });
-Route::get('/events/2', function () {
+Route::get('/events/view2', function () {
     return view('events.index2');
+});
+Route::get('/events/view3', function () {
+    return view('events.index3');
 });
 Auth::routes();
 

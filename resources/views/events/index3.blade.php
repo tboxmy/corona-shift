@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col">
             <div class="card">
-                <div class="card-header">View by Employee</div>
+                <div class="card-header">View by Day</div>
                 @csrf
                 <div class="card-body">
                     @if (session('status'))
@@ -13,8 +13,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    Week <span id="prevDate" onclick="prevDate()">[<<]</span><span id="currentDate"></span><span id="nextDate" onclick="nextDate()">[>>]</span>
-                    @include('events.tablestub')
+                    Week <span id="prevDate" onclick="prevDate()">[<<]</span><span id="currentDate">27-11</span><span id="nextDate" onclick="nextDate()">[>>]</span>
+                    @include('events.departmentTablestub')
+                    <hr>
+                    {{-- @include('events.departmentManualTablestub') --}}
                 </div>
             </div>
         </div>
@@ -23,7 +25,10 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    Schedule display as in database. AL is example of where the user timeoff is displayed.
+                    <ul>
+                        <li>#1 Alex
+                        <li>#2 Alice
+                        <li>#3 Andy
                 </div>
             </div>
         </div>
@@ -40,10 +45,22 @@
     var today = null;
     var displayDates = null;
     var startDate = dateFns.startOfDay(dateFns.subDays(new Date(), 1)); // minus  day for demo purpose
+    var workStartHour = 8;
+    var workEndHour = 24;
+    var totalDays = 2;
+    var totalStaff = 3;
+    // var items = array(('day'=>'Mon','data'=>('id'=>1,'name'=>'Alex'),('id'=>2,'name'=>'Andy')),
+    //     ('day'=>'Tue','data'=>('id'=>1,'name'=>'Alex'),('id'=>2,'name'=>'Andy'))
+    // );
+    var users = ["Alex","Andy","Alice","Nich"];
+    var item1 = ["Mon",users];
+    var item2 = ["Tue",users];    
+    let items = [item1, item2];
     window.onload = startup();
 
     function startup() {
-        getSchedule();
+        updateTableNav(startDate);
+        // getSchedule();
     }
 
     function askTitle() {
@@ -69,7 +86,8 @@
         today = shortDate();
         console.log('schedule '+startDate);
         // let start = dateFns.startOfDay(dateFns.subDays(new Date(), 1));
-        updateTableNav(startDate); 
+        updateTableNav(startDate);
+        return; 
         let messages = {
         id:1,
         title: 'Title info',
@@ -101,8 +119,7 @@
             console.log(error);
         })
     };
-
-    function addRows(item){    
+    function addRows_old(item){    
         var table=document.getElementById('employee');
         var rowCount=table.rows.length;
         var cellCount=table.rows[0].cells.length;
@@ -145,7 +162,91 @@
             }
         }
     }
-
+    function addHourRows(item){    
+        var table0=document.getElementById('department');
+        var table = table0.createTHead();
+        var rowCount=table.rows.length; // 0
+        var countHoursCol = 2 + (workEndHour - workStartHour);
+        var countHalfHoursCol = 2 + ((workEndHour - workStartHour)*2);
+        var cellCount = countHoursCol; //table.rows[0].cells.length; 
+        var row=table.insertRow(rowCount++); // first row
+        var th = document.createElement("TH");
+        var i = 0; // first column
+        
+        // cell=row.insertCell(i++);
+        cell = document.createElement("TH");
+        cell.innerHTML = "Day";
+        cell.scope = "col";
+        row.appendChild(cell); i++;
+        // cell=row.insertCell(i++);
+        cell = document.createElement("TH");
+        cell.innerHTML = "Ref";
+        cell.scope = "col";
+        row.appendChild(cell); i++;
+        for(var j=0; i<cellCount; i++, j++){
+            var cellId='headerTop'+i;
+            // cell=row.insertCell(i);
+            cell = document.createElement("TH");
+            cell.innerHTML = workStartHour + j;
+            cell.id = cellId;
+            cell.colSpan = "2";
+            cell.scope = "col";
+            row.appendChild(cell);
+        }
+        cellCount = countHalfHoursCol; 
+        row=table.insertRow(rowCount++); // second row
+        i = 0; // first column
+        cell = document.createElement("TH");
+        cell.innerHTML = "Occasion";
+        row.appendChild(cell); i++;  
+        cell = document.createElement("TH");
+        cell.innerHTML = "++";
+        row.appendChild(cell); i++;
+        for(var j=0; i<cellCount; i++, j++){
+            var cellId='header2Top'+i;
+            cell = document.createElement("TH");         
+            cell.id = cellId;
+            cell.scope = "col";
+            cell.className = "bg-dark";
+            row.appendChild(cell); 
+        }
+    }
+    function addRows(item){    
+        var table=document.getElementById('department');
+        var rowCount=table.rows.length; // 0
+        var cellCount=table.rows[1].cells.length;
+        // var countHoursCol = 2 + (workEndHour - workStartHour);
+        // var countHalfHoursCol = 2 + ((workEndHour - workStartHour)*2);
+        // var cellCount = countHalfHoursCol; //table.rows[0].cells.length; 
+        var row=table.insertRow(rowCount++); // first row
+        var i = 0; // first column   
+        cell=row.insertCell(i++);        
+        cell.innerHTML = item[0];
+        cell.scope = "col";
+        cell.rowSpan = "4";
+        isFirstRow = true;
+        for(var totalEmp=0; totalEmp < 4; totalEmp++){
+            var id = 0;
+            var cellCountMax = cellCount;
+            if(totalEmp>0){                
+                row=table.insertRow(rowCount++);
+                cellCountMax = cellCount- 1;
+                i=0;
+            }
+        cell=row.insertCell(i++);
+        cell.innerHTML = item[1][totalEmp];
+        cell.scope = "col";
+        // employee row 1        
+        for(var j=0; i<cellCountMax; i++, j++, id++){
+            var cellId='headerTop'+id;
+            cell=row.insertCell(i);            
+            cell.innerHTML = "+";
+            cell.id = cellId;
+            cell.className = "bg-dark";
+            cell.scope = "col";
+        }
+        }
+    }
     function shortDate(choice=null){        
         var today = new Date();
         if(choice!=null){
@@ -179,28 +280,30 @@
         currentDateTime.toISOString().split('T')[0];
         return currentDateTime;
     }
-
     function updateTableNav(start=null){        
         let row=document.getElementById('currentDate');
-        // today = currentDate();
         if(start==null){
             start = currentDate();
         }
         row.innerHTML=' ['+shortDate(start)+'] ';
-        
+        console.log('Update Table Nav');
+        // create table top header
+        initTableTopRow();
+        // create table side header
         displayDates = new Array();
-        for(i=0; i<7; i++){
-            let itemDate = dateFns.addDays(start,i);            
-            // itemDate.setDate(today.getDate() + i);
-            let cellId = 'headerDate';
-            cellId += (i+1);
-            displayDates[i]=itemDate;
-            row=document.getElementById(cellId);
-            row.innerHTML="Day "+(i+1)+"<br><span class='small'>"+shortDate(itemDate)+"</span>";
-            // console.log(i+' - '+itemDate)
-        }
+        // for(i=0; i<totalDays; i++){
+        //     let itemDate = dateFns.addDays(start,i);            
+        //     // itemDate.setDate(today.getDate() + i);
+        //     let cellId = 'headerDate';
+        //     cellId += (i+1);
+        //     displayDates[i]=itemDate;
+        //     console.log('>>');
+        //     console.log(cellId);
+        //     row=document.getElementById(cellId);
+        //     row.innerHTML="Day "+(i+1)+"<br><span class='small'>"+shortDate(itemDate)+"</span>";
+        //     // console.log(i+' - '+itemDate)
+        // }
     }
-
     function getShifts(user_id, start=null) {
         let url = "/events/getUserShifts";
         if(start==null){
@@ -234,29 +337,36 @@
             console.log(error);
         })
     }
-
     function prevDate(){
+        console.log('pressed prev');
         startDate = dateFns.startOfDay(dateFns.subDays(startDate, 7));
         var cel=document.getElementById('currentDate').innerHTML;  
         cel=shortDate(startDate);
-        initTableShifts();
+        // initTableShifts();
         getSchedule();
     }
     function nextDate(){
         startDate = dateFns.startOfDay(dateFns.addDays(startDate, 7));
         var cel=document.getElementById('currentDate').innerHTML;  
         cel=shortDate(startDate);
-        initTableShifts();
+        // initTableShifts();
         getSchedule();
     }
-
-    function initTableShifts(){
-        let table=document.getElementById('employee');
-        for(var i = 3;i<table.rows.length;){
+    function initTableTopRow(){
+        let table=document.getElementById('department');
+        for(var i = 0;i<table.rows.length;){
             table.deleteRow(i);
         }
+        addHourRows();
+        addRows(items[0]);
+        addRows(items[1]);
     }
-    
+    function initTableShifts(){
+        let table=document.getElementById('department');
+        for(var i = 2;i<table.rows.length;){
+            table.deleteRow(i);
+        }
+    }    
     function updateUserShiftRow(user_id,shift_name,shift_start,shift_end){
         // determine the dates to process        
         today = dateFns.startOfDay(startDate);

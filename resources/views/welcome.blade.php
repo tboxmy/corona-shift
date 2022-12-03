@@ -56,7 +56,8 @@
                                     Templates:
                                     <ol>
                                         <li><a href="/events/1">Calendar with CSS, jQuery and JS</a>
-                                        <li><a href="/events/2">Staff shift listing CSS and JS</a>
+                                        <li><a href="/events/view2">Staff shift listing by Employee with CSS and JS</a>
+                                        <li><a href="/events/view3">Staff shift listing by Department with CSS and JS</a>
                                     </ol>
                                 </div>
                             </div>
