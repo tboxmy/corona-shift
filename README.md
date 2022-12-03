@@ -6,6 +6,8 @@ Corona Shift project provides a design framework to manage shift scheduling that
 
 ![Screenshot](screenshot-initialtable.PNG)
 
+![Screenshot](screenshot-hourlyschedule.PNG)
+
 ## What
 
 This project provide the base components to handle planning of employee shift schedule. The framework is best described by the database structure, while the application demonstrates how the database is used. This includes;
