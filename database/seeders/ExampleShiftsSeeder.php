@@ -46,6 +46,9 @@ class ExampleShiftsSeeder extends Seeder
                 ['shift_id' => $record->id,
                 'user_id' => $user->id,
                 'department_code' => "hq",
+                'start'=>$today,
+                'end' => $end,
+                'published_at'=>$today,
                 ]
             );
         }

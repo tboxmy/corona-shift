@@ -98,9 +98,10 @@ class ShiftUserController extends Controller
         ->join('shift_types', 'shifts.shift_type_id', '=', 'shift_types.id');
         if ($start != null) {
             $startDate=Carbon::parse($start);
-            $userShifts = $userShifts->where('start', '>=', $startDate);
+            $userShifts = $userShifts->where('shifts.start', '>=', $startDate);
         }
         $userShifts = $userShifts->orderBy('shifts.start')
+        ->whereNotNull('shift_users.published_at')
         ->get(['shift_users.*','users.id as id','users.name as name'
         ,'shifts.name as shift_name','shifts.start as shift_start','shifts.end as shift_end'
         ,'shift_types.name as shift_type']);

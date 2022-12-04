@@ -44,26 +44,39 @@
 <script>    
     var today = null;
     var displayDates = null;
-    var startDate = dateFns.startOfDay(dateFns.subDays(new Date(), 1)); // minus  day for demo purpose
+    var startDate = dateFns.startOfWeek(new Date());
+    startDate = dateFns.startOfDay(startDate); // minus  day for demo purpose
     var workStartHour = 8;
     var workEndHour = 24;
     var totalDays = 2;
     var totalStaff = 3;
+    var datesOfWeek = null;
     // var items = array(('day'=>'Mon','data'=>('id'=>1,'name'=>'Alex'),('id'=>2,'name'=>'Andy')),
     //     ('day'=>'Tue','data'=>('id'=>1,'name'=>'Alex'),('id'=>2,'name'=>'Andy'))
     // );
     var users = ["Alex","Andy","Alice","Nich"];
-    var item1 = ["Mon",users];
-    var item2 = ["Tue",users];    
-    var item3 = ["Wed",users];
-    var item4 = ["Thu",users];   
-    var item5 = ["Fri",users];
-    let items = [item1, item2, item3, item4, item5];
+    var item1 = ["Sun",users];
+    var item2 = ["Mon",users];    
+    var item3 = ["Tue",users];
+    var item4 = ["Wed",users];   
+    var item5 = ["Thu",users];
+    var item6 = ["Fri",users];
+    var item7 = ["Sat",users];
+    let items = [item1, item2, item3, item4, item5, item6, item7];
     window.onload = startup();
 
     function startup() {
+        getDatesOfWeek();
         updateTableNav(startDate);
-        // getSchedule();
+        getSchedule();
+    }
+
+    function getDatesOfWeek(){
+        datesOfWeek = [];
+        for(var i=0; i<7; i++){
+            datesOfWeek[i]=dateFns.format(dateFns.addDays(startDate, i), 'dd-MM');
+        }
+        console.log(datesOfWeek);
     }
 
     function askTitle() {
@@ -82,6 +95,9 @@
             alert("DONE! " + choice + " is updated !!");
         }
     }
+    /**
+     * TODO
+     */
     function getSchedule() {
         let url = "/departmentStaff";
         // var month = today.getMonth()+1;
@@ -113,8 +129,8 @@
         }).then((data)=>{
             // if(res.status === 201 || res.status === 200){
                 data.data.forEach(function(item){
-                    // console.log(item);
-                    addRows(item);
+                    console.log(item);
+                    // addRows(item);                    
                     getShifts(item.id, startDate);
                 });                       
         }).catch((error)=> {
@@ -214,7 +230,7 @@
             row.appendChild(cell); 
         }
     }
-    function addRows(item){    
+    function addRows(dayOfWeek,item){    
         var table=document.getElementById('department');
         var rowCount=table.rows.length; // 0
         var cellCount=table.rows[1].cells.length;
@@ -224,7 +240,7 @@
         var row=table.insertRow(rowCount++); // first row
         var i = 0; // first column   
         cell=row.insertCell(i++);        
-        cell.innerHTML = item[0];
+        cell.innerHTML = item[0]+'<br>'+datesOfWeek[dayOfWeek];
         cell.scope = "col";
         cell.rowSpan = "4";
         isFirstRow = true;
@@ -307,6 +323,9 @@
         //     // console.log(i+' - '+itemDate)
         // }
     }
+    /**
+     * TODO
+     */
     function getShifts(user_id, start=null) {
         let url = "/events/getUserShifts";
         if(start==null){
@@ -346,6 +365,7 @@
         var cel=document.getElementById('currentDate').innerHTML;  
         cel=shortDate(startDate);
         // initTableShifts();
+        getDatesOfWeek();
         getSchedule();
     }
     function nextDate(){
@@ -353,6 +373,7 @@
         var cel=document.getElementById('currentDate').innerHTML;  
         cel=shortDate(startDate);
         // initTableShifts();
+        getDatesOfWeek();
         getSchedule();
     }
     function initTableTopRow(){
@@ -361,11 +382,11 @@
             table.deleteRow(i);
         }
         addHourRows();
-        addRows(items[0]);
-        addRows(items[1]);
-        addRows(items[2]);
-        addRows(items[3]);
-        addRows(items[4]);
+        addRows(0,items[0]);
+        addRows(1,items[1]);
+        addRows(2,items[2]);
+        addRows(3,items[3]);
+        addRows(4,items[4]);
 
     }
     function initTableShifts(){

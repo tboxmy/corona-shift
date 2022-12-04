@@ -18,6 +18,7 @@ class CreateDepartmentUsersTable extends Migration
             $table->string('code', 12);
             $table->bigInteger('user_id')->unsigned()->index();
             $table->boolean('is_shift')->default(false);
+            $table->jsonb('properties')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

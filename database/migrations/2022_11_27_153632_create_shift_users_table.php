@@ -19,6 +19,8 @@ class CreateShiftUsersTable extends Migration
             $table->integer('user_id');
             $table->string('description')->nullable();
             $table->string('department_code');
+            $table->timestamp('start');
+            $table->timestamp('end');
             $table->timestamp('published_at')->nullable();
             $table->integer('published_by')->nullable();
             $table->jsonb('options')->nullable();

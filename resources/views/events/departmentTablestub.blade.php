@@ -1,4 +1,4 @@
-<table class="table table-hover table-bordered" id="department">
+<table class="table table-hover table-bordered table-sm text-xsmall" id="department">
   <thead>
     <tr>
       <th scope="col" rowspan="3">Day</th>

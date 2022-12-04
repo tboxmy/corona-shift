@@ -53,6 +53,10 @@ Notes:
 ```
 git clone <SSH><USER><URL>
 php artisan migrate
+php artisan db:seed
+php artisan db:seed --class=ExampleShiftsSeeder
+
+OR individually load Seeder files
 php artisan db:seed --class=DefaultUsersSeeder
 php artisan db:seed --class=DefaultTypesSeeder
 OR
