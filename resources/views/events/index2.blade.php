@@ -24,15 +24,20 @@
             <div class="card">
                 <div class="card-body">
                     Schedule display as in database. AL is example of where the user timeoff is displayed.
+                    <p>Bootstrap 5 calendar widget
+                    <input id="datepicker" width="276" />
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    Notes: Places screen notes here.
-                </div>
-            </div>
+        <div class="card">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+
+        <div class="card-body">
+          <h5 class="card-title">Card title that wraps to a new line</h5>
+          <p class="card-text">Place text in a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+      </div>            
         </div>
     </div>
 </div>
@@ -45,6 +50,12 @@
     function startup() {
         getSchedule();
     }
+
+    
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap5'
+    });
+    
 
     function askTitle() {
         let choice = prompt("Please enter event title", "Task");

@@ -25,6 +25,13 @@
     <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 
+    <!-- Masonry -->
+    <script type="text/javascript" src="/public/js/masonry.pkgd.min.js"></script>
+
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    
     <script>
     
 	$(document).ready(function() {
