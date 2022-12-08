@@ -15,6 +15,10 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <ol>                        
+                        <li><a href="/events">Staff shift listing by Employee with CSS and JS</a>
+                        <li><a href="/eventsHourly">Staff shift listing by Department with CSS and JS</a>
+                    </ol>
                 </div>
             </div>
         </div>

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/events/1', function () {
     return view('events.index0');
 });
@@ -31,3 +32,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/departmentStaff', [App\Http\Controllers\ShiftController::class, 'getDepartmentUsers'])->name('getDepartmentUsers');
 Route::post('/events/getShifts', [App\Http\Controllers\ShiftController::class, 'getShifts'])->name('getShifts');
 Route::post('/events/getUserShifts', [App\Http\Controllers\ShiftUserController::class, 'getShiftByUserDate'])->name('getUserShifts');
+Route::get('/events/', [App\Http\Controllers\HomeController::class, 'viewUserDay'])->name('viewUserDay');
+Route::get('/eventsHourly', [App\Http\Controllers\HomeController::class, 'viewDayHours'])->name('viewDayHours');

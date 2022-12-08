@@ -25,4 +25,12 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function viewUserDay()
+    {
+        return view('events.index2');
+    }
+    public function viewDayHours()
+    {
+        return view('events.index3');
+    }
 }

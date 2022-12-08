@@ -67,7 +67,7 @@
         // var month = today.getMonth()+1;
         // var day = today.getDay();
         today = shortDate();
-        console.log('schedule '+startDate);
+        
         // let start = dateFns.startOfDay(dateFns.subDays(new Date(), 1));
         updateTableNav(startDate); 
         let messages = {
@@ -204,7 +204,7 @@
     function getShifts(user_id, start=null) {
         let url = "/events/getUserShifts";
         if(start==null){
-            console.log('#1');
+            
             start = currentDate();
         }
         let messages = {        
@@ -224,7 +224,7 @@
             return response.json();            
         }).then((data)=>{
             // if(res.status === 201 || res.status === 200){                
-                console.log('Post success');
+                
                 data.data.forEach(function(item){
                     updateUserShiftRow(item.user_id,item.shift_name,item.shift_start,item.shift_end);
                 });
@@ -261,14 +261,14 @@
         // determine the dates to process        
         today = dateFns.startOfDay(startDate);
         let abc = new Date();
-        console.log(dateFns.format(today, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"));
+        // console.log(dateFns.format(today, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"));
         for(i=0; i<7; i++){
             let itemDate = dateFns.addDays(today,i);
             cursorDate = currentDate(shift_start);
-            console.log('Process = '+itemDate+' AND '+cursorDate);
-            console.log('dateFns = '+dateFns.differenceInDays(itemDate, cursorDate));            
+            // console.log('Process = '+itemDate+' AND '+cursorDate);
+            // console.log('dateFns = '+dateFns.differenceInDays(itemDate, cursorDate));            
             if(itemDate.getDate() == cursorDate.getDate() ) {
-                console.log('use '+cursorDate);
+                // console.log('use '+cursorDate);
                 let cellId=user_id+'cell'+(i+2);              
                 row=document.getElementById(cellId);
                 row.innerHTML=shift_name+"<br><span class='small'>["+shortTime(cursorDate)+"]</span>";
