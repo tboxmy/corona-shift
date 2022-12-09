@@ -31,6 +31,8 @@
     <script src="js/bootstrap-datetimepicker.min.js"></script>
     <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="css/custom.css" rel="stylesheet" type="text/css" />
     
     <script>
     
