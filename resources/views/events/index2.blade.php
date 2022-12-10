@@ -48,14 +48,14 @@
     window.onload = startup();
 
     function startup() {
-        getSchedule();
+        getSchedule();        
     }
 
     
     $('#datepicker').datepicker({
-        uiLibrary: 'bootstrap5'
+        uiLibrary: 'bootstrap5',
+        format: 'dd/mm/yyyy',
     });
-    
 
     function askTitle() {
         let choice = prompt("Please enter event title", "Task");
