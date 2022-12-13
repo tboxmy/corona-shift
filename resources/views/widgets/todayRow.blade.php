@@ -20,9 +20,8 @@
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-100 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          
-          <h3 class="mb-0">{{$shiftUpcoming[0]['date']}}</h3>
           @if(count($shiftUpcoming)>0)
+          <h3 class="mb-0">{{$shiftUpcoming[0]['date']}}</h3>
           <div id="shift_today_department" class="mb-1 text-muted">Department ...</div>
           @foreach($shiftUpcoming as $row)
           <p id="shift_today_time" class="card-text mb-auto">{{$row['timeStart']}} to {{$row['timeEnd']}}</p>

@@ -18,7 +18,7 @@ class DefaultUsersSeeder extends Seeder
     {
         //
         // Users
-        $users = [['admin','admin@localhost','administator']
+        $users = [['admin','admin@localhost','administrator']
         ,['user01','user01@localhost','user1']
         ,['user02','user02@localhost','user2']
         ,['user03','user03@localhost','user3']

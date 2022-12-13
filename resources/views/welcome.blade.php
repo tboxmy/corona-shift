@@ -53,6 +53,16 @@
                             </div>
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                    Sample users with default install:
+                                    <ol>
+                                        <li>user01@localhost password user1
+                                        <li>user02@localhost password user2
+                                        <li>admin@localhost password administrator
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="ml-12">
+                                <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                     Templates:
                                     <ol>
                                         <li><a href="/events/1">Calendar with CSS, jQuery and JS</a>

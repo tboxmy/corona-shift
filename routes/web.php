@@ -35,3 +35,5 @@ Route::post('/events/getUserShifts', [App\Http\Controllers\ShiftUserController::
 Route::get('/events', [App\Http\Controllers\HomeController::class, 'viewUserDay'])->name('viewUserDay');
 Route::get('/eventsHourly', [App\Http\Controllers\HomeController::class, 'viewDayHours'])->name('viewDayHours');
 Route::post('/userShiftByDate', [App\Http\Controllers\HomeController::class, 'getUserShiftByDate'])->name('getUserShiftByDate');
+
+Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');

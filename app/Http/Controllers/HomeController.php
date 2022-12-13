@@ -88,4 +88,8 @@ class HomeController extends Controller
         $json_data = ['data'=>$shifts];
         return response(json_encode($json_data), 200);
     }
+    public function adminHome()
+    {
+        return view('admin.adminHome');
+    }
 }

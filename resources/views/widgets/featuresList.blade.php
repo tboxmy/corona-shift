@@ -16,7 +16,7 @@
     <div class="col d-flex align-items-start">
 
         <div>
-            <h4 class="fw-bold mb-0">User Managemnt</h4>
+            <h4 class="fw-bold mb-0">User Management</h4>
             <p>Manage users and the department scheduling matters</p>
         </div>
     </div>
