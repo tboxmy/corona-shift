@@ -37,3 +37,6 @@ Route::get('/eventsHourly', [App\Http\Controllers\HomeController::class, 'viewDa
 Route::post('/userShiftByDate', [App\Http\Controllers\HomeController::class, 'getUserShiftByDate'])->name('getUserShiftByDate');
 
 Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+Route::get('admin/users', [App\Http\Controllers\Admin\UserController::class, 'getUsers'])->name('admin.getusers')->middleware('is_admin');
+Route::get('/timeoffTypes', [App\Http\Controllers\TimeoffTypeController::class, 'getTimeoffTypes'])->name('timeofftypes.gettimeofftypes')->middleware('is_admin');
+Route::get('/shiftTypes', [App\Http\Controllers\ShiftTypeController::class, 'getShiftTypes'])->name('shifttypes.getshifttypes')->middleware('is_admin');

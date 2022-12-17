@@ -1,12 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\TimeoffType;
+use App\Models\User;
+use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Log;
 
-class TimeoffTypeController extends Controller
+class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,37 +23,35 @@ class TimeoffTypeController extends Controller
      */
     public function index()
     {
-        //
     }
 
-    public function getTimeoffTypes(Request $request)
+    public function getUsers(Request $request)
     {
         //
-        $timeoffTypes = new TimeoffType();
+        $users = new User();
         $length = $request->length??10;
         $start = $request->start??0;
         $orderColumn = "name";
-        $recordsTotal = clone $timeoffTypes;
+        $recordsTotal = clone $users;
         $recordsTotal = $recordsTotal->count();
         if ($request->has('search')) {
             $searchWord = $request->search;
-            $timeoffTypes = $timeoffTypes->where('name', 'Like', '%' . $searchWord . '%');
+            $users = $users->where('name', 'Like', '%' . $searchWord . '%');
         }
-        $recordsFiltered = clone $timeoffTypes;
+        $recordsFiltered = clone $users;
         $recordsFiltered = $recordsFiltered->count();
-        $timeoffTypes = $timeoffTypes->orderBy($orderColumn, 'ASC')->offset($start)->limit($length);
-        $timeoffTypes = $timeoffTypes->get();
+        $users = $users->orderBy($orderColumn, 'ASC')->offset($start)->limit($length);
+        $users = $users->get();
         $data = [
             'start'=>$start,
             'length'=>$length,
             'recordsTotal'=>$recordsTotal,
             'recordsFiltered'=>$recordsFiltered,
-            'data'=>$timeoffTypes,
+            'data'=>$users,
         ];
-        return view('timeoffTypes.index', compact('data'));
+        // return response($data, 200);
+        return view('admin.user.index', compact('data'));
     }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -70,10 +77,10 @@ class TimeoffTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TimeoffType  $timeoffType
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(TimeoffType $timeoffType)
+    public function show($id)
     {
         //
     }
@@ -81,10 +88,10 @@ class TimeoffTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TimeoffType  $timeoffType
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(TimeoffType $timeoffType)
+    public function edit($id)
     {
         //
     }
@@ -93,10 +100,10 @@ class TimeoffTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TimeoffType  $timeoffType
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TimeoffType $timeoffType)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -104,10 +111,10 @@ class TimeoffTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TimeoffType  $timeoffType
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TimeoffType $timeoffType)
+    public function destroy($id)
     {
         //
     }

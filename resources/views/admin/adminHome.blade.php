@@ -9,8 +9,9 @@
                 <div class="card-body">
                     You are Admin. Here are the base functions.
                     <ul>
-                        <li>User Management
-                        <li>Shift Management
+                        <li>User Management : <a href="{{url('/admin/users')}}">Listing</a>
+                        <li>Shift Management : <a href="{{url('/shiftTypes')}}">Shift Types</a>,
+                        <a href="{{url('/timeoffTypes')}}">Timeoff Types</a>
                         <li>System Configuration
                     </ul>
                 </div>

@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\ShiftType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ShiftTypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,32 @@ class ShiftTypeController extends Controller
      */
     public function index()
     {
+    }
+    public function getShiftTypes(Request $request)
+    {
         //
+        $shiftTypes = new ShiftType();
+        $length = $request->length??10;
+        $start = $request->start??0;
+        $orderColumn = "name";
+        $recordsTotal = clone $shiftTypes;
+        $recordsTotal = $recordsTotal->count();
+        if ($request->has('search')) {
+            $searchWord = $request->search;
+            $shiftTypes = $shiftTypes->where('name', 'Like', '%' . $searchWord . '%');
+        }
+        $recordsFiltered = clone $shiftTypes;
+        $recordsFiltered = $recordsFiltered->count();
+        $shiftTypes = $shiftTypes->orderBy($orderColumn, 'ASC')->offset($start)->limit($length);
+        $shiftTypes = $shiftTypes->get();
+        $data = [
+            'start'=>$start,
+            'length'=>$length,
+            'recordsTotal'=>$recordsTotal,
+            'recordsFiltered'=>$recordsFiltered,
+            'data'=>$shiftTypes,
+        ];
+        return view('shiftTypes.index', compact('data'));
     }
 
     /**
