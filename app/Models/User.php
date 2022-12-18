@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Department;
+use App\Models\DepartmentUsers;
 use App\Models\UserProfile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -48,5 +50,13 @@ class User extends Authenticatable
     public function userProfile()
     {
         return $this->hasOne('App\Models\UserProfile');
+    }
+    public function departments()
+    {
+        return $this->belongsToMany('App\Models\Department', 'department_users', 'user_id', 'department_id');
+    }
+    public function department()
+    {
+        return $this->belongsTo('App\Models\Department', 'department_users', 'user_id', 'department_id')->latest();
     }
 }

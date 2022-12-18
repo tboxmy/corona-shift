@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header">Shift types</div>
         <div class="card-body">
-<table id="shiftTypeListTable" class="border-collapse table-auto w-full text-sm">
+<table id="shiftTypesListTable" class="border-collapse table-auto w-full text-sm">
     <thead>
         <tr>
         <th>id</th>

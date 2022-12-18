@@ -7,6 +7,7 @@
         <th>id</th>
         <th>Name</th>
         <th>Email</th>
+        <th>Department</th>
         <th>Hourly rate</th>
         <th>Timezone</th>
         <th>Created at</th>
@@ -18,7 +19,8 @@
         <tr>
             <td>{{$user->id}}</td>
             <td>{{$user->name}}</td>
-            <td>{{$user->email}}</td>            
+            <td>{{$user->email}}</td>
+            <td>{{$user->departments->last()->name??''}}</td>
             <td>{{$user->userProfile->currency}} {{number_format(($user->userProfile->hourly_rate)/100,2)}}</td>
             <td>{{$user->userProfile->timezone}}</td>
             <td>{{$user->created_at}}</td>

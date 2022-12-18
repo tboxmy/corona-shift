@@ -41,7 +41,7 @@ class UserController extends Controller
         }
         $recordsFiltered = clone $users;
         $recordsFiltered = $recordsFiltered->count();
-        $users = $users->with('userProfile')->orderBy($orderColumn, 'ASC')->offset($start)->limit($length);
+        $users = $users->with('userProfile', 'department')->orderBy($orderColumn, 'ASC')->offset($start)->limit($length);
         $users = $users->get();
         $data = [
             'start'=>$start,

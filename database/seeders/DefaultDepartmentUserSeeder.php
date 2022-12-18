@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+
+use App\Models\Department;
 use App\Models\DepartmentUsers;
 use App\Models\User;
 
@@ -17,16 +19,22 @@ class DefaultDepartmentUserSeeder extends Seeder
     public function run()
     {
         //
-        $users = [['hq','user01@localhost']
-        ,['hq','user02@localhost']
+        $users = [['user01@localhost']
+        ,['user02@localhost']
+        ,['user03@localhost']
         ];
+        $department = Department::create(
+            ['code'=>'hq'
+             ,'name'=>'Headquarters'
+             ,'is_shift'=>true
+             ,'description'=>'Default department']
+        );
         foreach ($users as $item) {
-            $user = User::where('email', $item[1])->first();
+            $user = User::where('email', $item[0])->first();
             if ($user!=null) {
                 DepartmentUsers::create(
-                    ['code'=>$item[0],
+                    ['department_id'=>$department->id,
                     'user_id'=>$user->id,
-                    'is_shift'=>true,
                     'created_at'=>Carbon::now(),
                     'updated_at'=>null]
                 );
