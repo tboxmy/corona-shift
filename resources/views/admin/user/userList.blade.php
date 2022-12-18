@@ -1,12 +1,14 @@
 <div class="card">
     <div class="card-header">User List</div>
         <div class="card-body">
-<table class="border-collapse table-auto w-full text-sm">
+<table id="userListTable" class="border-collapse table-auto w-full text-sm">
     <thead>
         <tr>
         <th>id</th>
         <th>Name</th>
         <th>Email</th>
+        <th>Hourly rate</th>
+        <th>Timezone</th>
         <th>Created at</th>
         <th>Admin</th>
         </tr>
@@ -16,7 +18,9 @@
         <tr>
             <td>{{$user->id}}</td>
             <td>{{$user->name}}</td>
-            <td>{{$user->email}}</td>
+            <td>{{$user->email}}</td>            
+            <td>{{$user->userProfile->currency}} {{number_format(($user->userProfile->hourly_rate)/100,2)}}</td>
+            <td>{{$user->userProfile->timezone}}</td>
             <td>{{$user->created_at}}</td>
             <td>@if($user->is_admin)
                 YES

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\UserProfile;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -40,7 +41,7 @@ class UserController extends Controller
         }
         $recordsFiltered = clone $users;
         $recordsFiltered = $recordsFiltered->count();
-        $users = $users->orderBy($orderColumn, 'ASC')->offset($start)->limit($length);
+        $users = $users->with('userProfile')->orderBy($orderColumn, 'ASC')->offset($start)->limit($length);
         $users = $users->get();
         $data = [
             'start'=>$start,
