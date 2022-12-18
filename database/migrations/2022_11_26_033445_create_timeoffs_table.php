@@ -22,7 +22,8 @@ class CreateTimeoffsTable extends Migration
             $table->date('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('created_by')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('timeoff_type_id')->references('id')->on('timeoff_types');
         });
     }
 

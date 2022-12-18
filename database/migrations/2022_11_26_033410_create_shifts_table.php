@@ -19,13 +19,14 @@ class CreateShiftsTable extends Migration
             $table->string('description')->nullable();
             $table->integer('shift_type_id');
             $table->integer('parent_id')->nullable();
+            $table->integer('total_pax')->unsigned()->default(1);
             $table->integer('region_id')->default(0)->comment('Shift region coverage where 0=All regions');
             $table->timestamp('start')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('end')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->jsonb('options')->nullable();
             $table->timestamps();
-
-            $table->foreign('shift_type_id')->references('id')->on('shift_types')->onDelete('cascade');
+            $table->foreign('parent_id')->references('id')->on('shifts')->onDelete('cascade');
+            $table->foreign('shift_type_id')->references('id')->on('shift_types');
         });
     }
 

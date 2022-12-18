@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\UserProfile;
 
 class DefaultUsersSeeder extends Seeder
 {
@@ -24,12 +25,18 @@ class DefaultUsersSeeder extends Seeder
         ,['user03','user03@localhost','user3']
         ];
         foreach ($users as $item) {
-            User::create(
+            $user = User::create(
                 ['name'=>$item[0],
                 'email'=>$item[1],
                 'password' => Hash::make($item[2]),
                 'created_at'=>Carbon::now(),
                 'updated_at'=>null]
+            );
+            UserProfile::create(
+                ['user_id'=>$user->id,
+                 'hourly_rate'=>1000,
+                 'timezone'=>'Asia/Kuala_Lumpur',
+                 'currency'=>'MYR']
             );
         }
     }

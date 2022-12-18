@@ -21,7 +21,7 @@ class CreateDepartmentUsersTable extends Migration
             $table->jsonb('properties')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
