@@ -55,9 +55,10 @@
                                 <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                     Sample users with default install:
                                     <ol>
-                                        <li>user01@localhost password user1
-                                        <li>user02@localhost password user2
-                                        <li>admin@localhost password administrator
+                                        <li>Can view own schedule: user01@localhost password user1
+                                        <li>Can view own schedule: user02@localhost password user2
+                                        <li>Can update schedule: planner@localhost password planner
+                                        <li>Can configure system: admin@localhost password administrator
                                     </ol>
                                 </div>
                             </div>
