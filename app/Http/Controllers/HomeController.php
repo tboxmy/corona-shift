@@ -64,9 +64,10 @@ class HomeController extends Controller
             } else {
                 $data['timeEnd']=Carbon::parse($row->end)->format("h:i A (d-m)");
             }
-            $xount = array_push($shiftUpcoming, $data);
+            $xcount = array_push($shiftUpcoming, $data);
         }
-        return view('home', compact('shiftToday', 'shiftUpcoming', 'shifts'));
+        $user['role']=$user->userProfile->role;
+        return view('home', compact('shiftToday', 'shiftUpcoming', 'shifts', 'user'));
     }
     public function viewUserDay()
     {

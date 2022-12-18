@@ -38,6 +38,7 @@ class DefaultUsersSeeder extends Seeder
                 ['user_id'=>$user->id,
                  'hourly_rate'=>1000,
                  'timezone'=>'Asia/Kuala_Lumpur',
+                 'role'=>$item[4],
                  'currency'=>'MYR']
             );
         }

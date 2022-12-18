@@ -31,7 +31,9 @@
     </div>
     <div class="row justify-content-center">
         <div class="col ">
+        @if($user->userProfile->role == 'planner')
         @include('widgets.featuresList')
+        @endif
         </div>
     </div>
     
