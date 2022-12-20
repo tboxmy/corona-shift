@@ -221,7 +221,8 @@
         let messages = {        
         user_id: user_id,
         startDate: start,
-        }
+        };
+        console.log(messages);
         let data = JSON.stringify(messages);
         fetch(url, {            
             method: 'post',

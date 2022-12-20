@@ -10,7 +10,8 @@
         <div>
             <h4 class="fw-bold mb-0">Daily Schedule by Department Users</h4>
             <p>List schedule of employees for each day.</p>
-            <a href="/events">Staff shift listing by Department with CSS and JS</a>
+            <a href="/events">Staff shift listing by Department with CSS and JS</a><br>
+            <a href="/shifts">Staff shift listing as text</a>
         </div>
     </div>
     <div class="col d-flex align-items-start">

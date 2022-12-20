@@ -66,7 +66,7 @@ class HomeController extends Controller
             }
             $xcount = array_push($shiftUpcoming, $data);
         }
-        $user['role']=$user->userProfile->role;
+
         return view('home', compact('shiftToday', 'shiftUpcoming', 'shifts', 'user'));
     }
     public function viewUserDay()

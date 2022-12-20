@@ -18,6 +18,7 @@ class CreateShiftUsersTable extends Migration
             $table->integer('shift_id');
             $table->integer('user_id');
             $table->string('description')->nullable();
+            $table->integer('department_id');
             $table->string('department_code');
             $table->timestamp('start');
             $table->timestamp('end');

@@ -40,3 +40,5 @@ Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome
 Route::get('admin/users', [App\Http\Controllers\Admin\UserController::class, 'getUsers'])->name('admin.getusers')->middleware('is_admin');
 Route::get('/timeoffTypes', [App\Http\Controllers\TimeoffTypeController::class, 'getTimeoffTypes'])->name('timeofftypes.gettimeofftypes')->middleware('is_admin');
 Route::get('/shiftTypes', [App\Http\Controllers\ShiftTypeController::class, 'getShiftTypes'])->name('shifttypes.getshifttypes')->middleware('is_admin');
+
+Route::get('/shifts', [App\Http\Controllers\ShiftUserController::class, 'index'])->name('shifts.index');

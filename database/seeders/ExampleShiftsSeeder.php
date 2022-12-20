@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use App\Models\Department;
 use App\Models\Shift;
 use App\Models\ShiftType;
 use App\Models\ShiftUser;
@@ -30,6 +31,7 @@ class ExampleShiftsSeeder extends Seeder
         , [$shiftType->name, 'Demo '.$shiftType, $shiftType->id, null, null, 'user01']
         , [$shiftType->name, 'Demo '.$shiftType, $shiftType->id, null, null, 'user02']
         ];
+        $dept = Department::where('code', 'hq')->first();
         foreach ($shifts as $item) {
             $user = User::where('name', $item[5])->first();
             $record = Shift::create(
@@ -45,7 +47,8 @@ class ExampleShiftsSeeder extends Seeder
             ShiftUser::create(
                 ['shift_id' => $record->id,
                 'user_id' => $user->id,
-                'department_code' => "hq",
+                'department_id' => $dept->id,
+                'department_code' => $dept->code,
                 'start'=>$today,
                 'end' => $end,
                 'published_at'=>$today,

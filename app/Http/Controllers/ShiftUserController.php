@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\ShiftUser;
 use App\Models\User;
 use Carbon\Carbon;
@@ -15,9 +16,44 @@ class ShiftUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $department = "hq";
+        $departments = Department::with('shifts')->where('code', $department);
+        $length = $request->length??10;
+        $start = $request->start??0;
+        $orderColumn = "name";
+        $departmentUsers = clone $departments;
+        $recordsTotal = clone $departments;
+        $recordsTotal = $recordsTotal->count();
+        if ($request->has('search')) {
+            $searchWord = $request->search;
+            $shiftTypes = $departments->where('name', 'Like', '%' . $searchWord . '%');
+        }
+        $recordsFiltered = clone $departments;
+        $recordsFiltered = $recordsFiltered->count();
+        $departmentUsers = Department::where('code', $department)->orderBy('name', 'ASC')->first()->users;
+        $departmentShifts = $departments->first();
+        $shifts = null;
+        // Log::debug($departmentShifts);
+        // foreach ($departmentShifts as $item) {
+        //     Log::debug('>> '.$item);
+        // }
+        $shift_list = [
+            'start'=>$start,
+            'length'=>$length,
+            'recordsTotal'=>$recordsTotal,
+            'recordsFiltered'=>$recordsFiltered,
+            'data'=>$departmentShifts->shifts
+        ];
+        $users = null;
+        foreach ($departmentUsers as $du) {
+            $users[$du->id] = $du->name;
+        }
+        // $users = $departmentUsers;
+        Log::debug($users);
+        return view('shifts.index', compact('shift_list', 'users'));
     }
 
     /**
@@ -116,6 +152,7 @@ class ShiftUserController extends Controller
         $results = null;
         $days = $request->days??7;
         $startDate = $request->startDate??null;
+        Log::debug($request);
         if ($startDate != null) {
             Log::debug('#1 '.$startDate);
             $results = $this->getShift($userId, $days, $startDate);
