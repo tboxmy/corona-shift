@@ -27,9 +27,9 @@ class ExampleShiftsSeeder extends Seeder
         $end->hour = 17;
         $end->minute = 00;
         $shiftType = ShiftType::where('name', '9HRS')->first();
-        $shifts = [[$shiftType->name, 'Demo '.$shiftType, $shiftType->id, null, null, 'user01']
-        , [$shiftType->name, 'Demo '.$shiftType, $shiftType->id, null, null, 'user01']
-        , [$shiftType->name, 'Demo '.$shiftType, $shiftType->id, null, null, 'user02']
+        $shifts = [[$shiftType->name, 'Demo '.$shiftType->name, $shiftType->id, null, $shiftType, 'user01']
+        , [$shiftType->name, 'Demo '.$shiftType->name, $shiftType->id, null, $shiftType, 'user01']
+        , [$shiftType->name, 'Demo '.$shiftType->name, $shiftType->id, null, $shiftType, 'user02']
         ];
         $dept = Department::where('code', 'hq')->first();
         foreach ($shifts as $item) {
@@ -39,6 +39,7 @@ class ExampleShiftsSeeder extends Seeder
                 'description'=>$item[1],
                 'shift_type_id' => $item[2],
                 'region_id' => 0,
+                'options' => json_encode($item[4]),
                 'start'=>$today,
                 'end' => $end]
             );
