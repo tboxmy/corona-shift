@@ -13,8 +13,23 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    Week <span id="prevDate" onclick="prevDate()">[<<]</span><span id="currentDate"></span><span id="nextDate" onclick="nextDate()">[>>]</span>
+                    <div class="row">
+                        <div class="col" style="overflow: hidden;">
+                        <select class="form-select" id="dept_select" onchange="updateDept()" aria-label="Default select example">                            
+                            <option value="hq" selected>HQ</option>
+                            <option value="ru">Ruby</option>
+                            <option value="di">Diamond</option>
+                        </select>
+                        </div>
+                        <div class="col" style="overflow: hidden;">
+                        Week <span id="prevDate" onclick="prevDate()">[<<]</span><span id="currentDate"></span><span id="nextDate" onclick="nextDate()">[>>]</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
                     @include('events.tablestub')
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,6 +59,7 @@
 <script>    
     var today = null;
     var displayDates = null;
+    var department = document.getElementById('dept_select').value;
     var startDate = dateFns.startOfDay(dateFns.subDays(new Date(), 1)); // minus  day for demo purpose
     window.onload = startup();
 
@@ -85,7 +101,7 @@
         id:1,
         title: 'Title info',
         body: 'This is the content',
-        dept: 'hq',
+        dept: department,
         start: startDate,
         }
         let data = JSON.stringify(messages);
@@ -106,7 +122,9 @@
                     // console.log(item);
                     addRows(item);
                     getShifts(item.id, startDate);
-                });                       
+                });
+                var department_name=document.getElementById('dept_name');
+                department_name.innerHTML = data.dept.name;
         }).catch((error)=> {
             console.log('Post Error');
             console.log(error);
@@ -258,6 +276,11 @@
         startDate = dateFns.startOfDay(dateFns.addDays(startDate, 7));
         var cel=document.getElementById('currentDate').innerHTML;  
         cel=shortDate(startDate);
+        initTableShifts();
+        getSchedule();
+    }
+    function updateDept(){
+        department=document.getElementById('dept_select').value;
         initTableShifts();
         getSchedule();
     }

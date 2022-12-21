@@ -107,32 +107,31 @@ class ShiftController extends Controller
         Log::debug($request);
         if ($dept == null) {
             Log::debug('#dept=null');
-            $departments = Department::where('is_shift', true)->get()->pluck('id');
-            $departmentsCode = Department::where('is_shift', true)->get()->pluck('code');
+            $departments = null;
         } else {
             Log::debug('#departments');
-            $departments = Department::where('code', $request->dept)->where('is_active', true)
-                ->where('is_shift', true)->get()->pluck('id');
+            $department = Department::where('code', $request->dept)
+                ->where('is_shift', true)->first();
             $departmentsCode = Department::where('code', $request->dept)->where('is_active', true)
-            ->where('is_shift', true)->first()->pluck('code');
+                ->where('is_shift', true)->get();
         }
         Log::debug('#departments');
         // Log::debug($departmentsCode);
-        if (count($departments)>0) {
-            $shifts = DepartmentUsers::whereIn('department_id', $departments)
+        if ($department != null) {
+            $shifts = DepartmentUsers::where('department_id', $department->id)
             ->get()->pluck('user_id');
-            Log::debug($shifts);
             $shiftUsers = User::whereIn('id', $shifts)->select(['*', DB::raw("'{$departmentsCode}' as dept")])
             ->get();
 
-            Log::debug($shiftUsers);
+            Log::debug($department);
             // $users = User::whereIn('id', $shiftUsers)->get();
-            $json_data = ['data'=>$shiftUsers];
+            $json_data = ['data'=>$shiftUsers, 'dept'=>$department,
+                'departments'=>$departmentsCode];
             Log::debug('Received request');
             Log::debug($request);
             return response(json_encode($json_data), 200);
         }
 
-        return response(json_encode(['message'=>'failed']), 400);
+        return response(json_encode(['status'=>1, 'message'=>'failed']), 400);
     }
 }

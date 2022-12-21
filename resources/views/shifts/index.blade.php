@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
+        @include('shifts.popupAddShift')
     <div class="col">
             <div class="card">
               <div class="card-header">Shift listing by Employee</div>
@@ -16,7 +17,9 @@
                         <input id="datepicker" width="276" />
                     </div>
                     <div class="col">
-                        [Add shift]
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popupAddShift">
+                    Add shift
+                    </button>
                     </div>
                 </div>
                 <table class="table">
@@ -39,8 +42,12 @@
                             <td>{{ $item->start}}</td>
                             <td>{{ $item->end}}</td>
                             <td><form class="form-inline">
+                                @isset($item->published_at)
+                                {{$item->published_at}}
+                                @else
                                 <button type="submit" class="btn btn-primary mb-2">Publish</button>
-                                <button type="submit" class="btn btn-danger mb-2">Delete</button>
+                                @endisset
+                                <button type="submit" class="btn btn-danger mb-2" disabled>Delete</button>
                                 </form>
                             </td>
                         </tr>

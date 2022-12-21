@@ -1,7 +1,7 @@
 <table class="table table-hover" id="employee">
   <thead>
     <tr>
-      <th scope="col" rowspan="3">Department: HQ<br>Employee</th>
+      <th scope="col" rowspan="3">Department: <span id="dept_name"></span><br>Employee</th>
       <th scope="col-1">Ref</th>
       <th scope="col" id="headerDate1">Day 1<br>dd-mm</th>
       <th scope="col" id="headerDate2">Day 2<br class="table-sm">dd-mm</th>

@@ -23,6 +23,8 @@ class CreateShiftsTable extends Migration
             $table->integer('region_id')->default(0)->comment('Shift region coverage where 0=All regions');
             $table->timestamp('start')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('end')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('published_at')->nullable();
+            $table->integer('published_by')->nullable();
             $table->jsonb('options')->nullable();
             $table->timestamps();
             $table->foreign('parent_id')->references('id')->on('shifts')->onDelete('cascade');

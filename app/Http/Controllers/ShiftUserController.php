@@ -36,10 +36,7 @@ class ShiftUserController extends Controller
         $departmentUsers = Department::where('code', $department)->orderBy('name', 'ASC')->first()->users;
         $departmentShifts = $departments->first();
         $shifts = null;
-        // Log::debug($departmentShifts);
-        // foreach ($departmentShifts as $item) {
-        //     Log::debug('>> '.$item);
-        // }
+
         $shift_list = [
             'start'=>$start,
             'length'=>$length,
@@ -51,7 +48,6 @@ class ShiftUserController extends Controller
         foreach ($departmentUsers as $du) {
             $users[$du->id] = $du->name;
         }
-        // $users = $departmentUsers;
         Log::debug($users);
         return view('shifts.index', compact('shift_list', 'users'));
     }
@@ -121,7 +117,7 @@ class ShiftUserController extends Controller
     {
         //
     }
-    protected function getShift($userId=null, $days=1, $start=null)
+    protected function getShift($userId=null, $isPublished=false, $days=1, $start=null)
     {
         //
         $user = User::find($userId);
@@ -136,8 +132,11 @@ class ShiftUserController extends Controller
             $startDate=Carbon::parse($start);
             $userShifts = $userShifts->where('shifts.start', '>=', $startDate);
         }
+        if ($isPublished==true) {
+            $userShifts = $userShifts->whereNotNull('shifts.published_at');
+        }
         $userShifts = $userShifts->orderBy('shifts.start')
-        ->whereNotNull('shift_users.published_at')
+
         ->get(['shift_users.*','users.id as id','users.name as name'
         ,'shifts.name as shift_name','shifts.start as shift_start','shifts.end as shift_end'
         ,'shift_types.name as shift_type']);
@@ -155,13 +154,13 @@ class ShiftUserController extends Controller
         Log::debug($request);
         if ($startDate != null) {
             Log::debug('#1 '.$startDate);
-            $results = $this->getShift($userId, $days, $startDate);
+            $results = $this->getShift($userId, true, $days, $startDate);
         } else {
             Log::debug('#2');
-            $results = $this->getShift($userId, $days);
+            $results = $this->getShift($userId, true, $days);
         }
 
-        $results = $this->getShift($userId);
+        $results = $this->getShift($userId, true);
         $json_data = [
             'data'=>$results
         ];

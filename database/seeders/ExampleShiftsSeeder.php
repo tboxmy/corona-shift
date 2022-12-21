@@ -19,18 +19,19 @@ class ExampleShiftsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        // Default to start at 8:00AM
         $today = Carbon::now();
         $today->hour = 8;
         $today->minute = 00;
+        $today->second = 00;
         $end = clone $today;
-        $end->hour = 17;
-        $end->minute = 00;
         $shiftType = ShiftType::where('name', '9HRS')->first();
+        $end->addMinutes($shiftType->duration);
         $shifts = [[$shiftType->name, 'Demo '.$shiftType->name, $shiftType->id, null, $shiftType, 'user01']
         , [$shiftType->name, 'Demo '.$shiftType->name, $shiftType->id, null, $shiftType, 'user01']
         , [$shiftType->name, 'Demo '.$shiftType->name, $shiftType->id, null, $shiftType, 'user02']
         ];
+        $planner = User::where('name', 'planner')->first();
         $dept = Department::where('code', 'hq')->first();
         foreach ($shifts as $item) {
             $user = User::where('name', $item[5])->first();
@@ -41,7 +42,9 @@ class ExampleShiftsSeeder extends Seeder
                 'region_id' => 0,
                 'options' => json_encode($item[4]),
                 'start'=>$today,
-                'end' => $end]
+                'end' => $end,
+                'published_at'=>$today,
+                'published_by'=>$planner->id]
             );
             $today->modify('+1 days');
             $end->modify('+1 days');
@@ -52,7 +55,6 @@ class ExampleShiftsSeeder extends Seeder
                 'department_code' => $dept->code,
                 'start'=>$today,
                 'end' => $end,
-                'published_at'=>$today,
                 ]
             );
         }

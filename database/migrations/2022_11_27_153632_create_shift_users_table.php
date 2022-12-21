@@ -22,8 +22,8 @@ class CreateShiftUsersTable extends Migration
             $table->string('department_code');
             $table->timestamp('start');
             $table->timestamp('end');
-            $table->timestamp('published_at')->nullable();
-            $table->integer('published_by')->nullable();
+            $table->timestamp('clockin_at')->nullable();
+            $table->timestamp('clockout_at')->nullable();
             $table->jsonb('options')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');

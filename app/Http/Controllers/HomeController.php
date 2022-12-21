@@ -33,9 +33,9 @@ class HomeController extends Controller
         if ($user==null) {
             dd('Not authenticated');
         }
-        $shifts = ShiftUser::where('user_id', $user->id)->whereNotNull('published_at')
+        $shifts = ShiftUser::where('user_id', $user->id)
         ->where('start', '>=', $today->startOfDay())->get();
-        $shiftTodayRow = ShiftUser::where('user_id', $user->id)->whereNotNull('published_at')
+        $shiftTodayRow = ShiftUser::where('user_id', $user->id)
         ->whereDate('start', '=', $today->startOfDay())->orderBy('created_at', 'DESC')->get();
         $shiftToday = [];
         foreach ($shiftTodayRow as $row) {
@@ -50,7 +50,7 @@ class HomeController extends Controller
             }
             $xount = array_push($shiftToday, $data);
         }
-        $shiftUpcomingRow = ShiftUser::where('user_id', $user->id)->whereNotNull('published_at')
+        $shiftUpcomingRow = ShiftUser::where('user_id', $user->id)
         ->whereDate('start', '>', $today->startOfDay())->orderBy('created_at', 'DESC')->first();
         $shiftUpcoming = [];
         if ($shiftUpcomingRow != null) {
