@@ -30,7 +30,7 @@
                         <th scope="col">Shift (break mins)</th>
                         <th scope="col">Start</th>
                         <th scope="col">End</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Publish/Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,8 +46,8 @@
                                 {{$item->published_at}}
                                 @else
                                 <button type="submit" class="btn btn-primary mb-2">Publish</button>
-                                @endisset
                                 <button type="submit" class="btn btn-danger mb-2" disabled>Delete</button>
+                                @endisset                                
                                 </form>
                             </td>
                         </tr>
