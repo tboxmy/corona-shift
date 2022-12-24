@@ -1,4 +1,5 @@
 <p align="center"><a href="https://tboxmy.blogspot.com" target="_blank">Blogspot</a></p>
+# DEVELOPER NOTES
 
 ## About
 
@@ -43,6 +44,11 @@ Through this framework, it can be easily extended to automated shift scheduling 
 | Popper (npm)    | 2.11.6 |
 | dateFns         | 2.29.3 |
 
+Notes:
+
+-   JQuery is setup, however I have decided to continue without it at this stage as JavaScript is able to provide the required functions.
+-   Moment is setup, however dateFns is now implemented where possible to leverage at lighter code.
+
 ## Installing this project
 
 ```
@@ -50,6 +56,14 @@ git clone <SSH><USER><URL>
 php artisan migrate
 php artisan db:seed
 php artisan db:seed --class=ExampleShiftsSeeder
+
+OR individually load Seeder files
+php artisan db:seed --class=DefaultUsersSeeder
+php artisan db:seed --class=DefaultTypesSeeder
+OR
+php artisan migrate:fresh --seed --seeder=DefaultTypesSeeder
+
+php artisan db:seed --class=DefaultDepartmentUserSeeder
 ```
 
 -   Configure database settings in the file .env
@@ -94,4 +108,16 @@ DB_USERNAME=postgres
 DB_PASSWORD=postgres
 ```
 
-[Developer notes](/readme/README-DEVEL)
+## Bootstrap
+
+Installed using Laravel mix
+
+```
+npm install bootstrap
+npm install sass && npm install sass-loader
+npm run dev
+```
+
+## Syntax hightlights
+
+-   [Markdown](README-markdown)
