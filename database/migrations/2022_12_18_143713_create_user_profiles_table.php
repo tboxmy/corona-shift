@@ -15,7 +15,8 @@ class CreateUserProfilesTable extends Migration
     {
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->comment('users table');
+            // Postgresql
+            // $table->integer('user_id')->comment('users table');
             $table->string('role')->default('staff')->nullable()->comment('Role is usage of system');
             $table->integer('hourly_rate')->comment('salary rate at lowest currency unit. E.g cents for MYR currency')->default(100);
             $table->string('timezone')->nullable();
@@ -23,7 +24,11 @@ class CreateUserProfilesTable extends Migration
             $table->text('description')->nullable();
             $table->jsonb('options')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // Postgresql
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            // Mysql
+            $table->foreignId('user_id')->nullable()->consrained('users')->onDelete('set null');
         });
     }
 

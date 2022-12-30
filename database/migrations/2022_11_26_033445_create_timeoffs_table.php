@@ -17,13 +17,20 @@ class CreateTimeoffsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->integer('timeoff_type_id');
-            $table->integer('user_id');
+            // Postgresql
+            // $table->integer('timeoff_type_id');
+            // $table->integer('user_id');
             $table->date('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('created_by')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('timeoff_type_id')->references('id')->on('timeoff_types');
+            
+            // Postgresql
+            // $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('timeoff_type_id')->references('id')->on('timeoff_types');
+
+            // Mysql
+            $table->foreignId('user_id')->nullable()->consrained('users')->onDelete('set null');
+            $table->foreignId('timeoff_type_id')->nullable()->consrained('timeoff_types')->onDelete('set null');
         });
     }
 

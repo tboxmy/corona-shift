@@ -17,7 +17,8 @@ class CreateShiftsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->integer('shift_type_id');
+            // Postgresql
+            // $table->integer('shift_type_id');            
             $table->integer('parent_id')->nullable();
             $table->integer('total_pax')->unsigned()->default(1);
             $table->integer('region_id')->default(0)->comment('Shift region coverage where 0=All regions');
@@ -27,8 +28,13 @@ class CreateShiftsTable extends Migration
             $table->integer('published_by')->nullable();
             $table->jsonb('options')->nullable();
             $table->timestamps();
-            $table->foreign('parent_id')->references('id')->on('shifts')->onDelete('cascade');
-            $table->foreign('shift_type_id')->references('id')->on('shift_types');
+            // Postgresql
+            // $table->foreign('parent_id')->references('id')->on('shifts')->onDelete('cascade');
+            // $table->foreign('shift_type_id')->references('id')->on('shift_types')->onDelete('cascade');
+
+            // Mysql
+            $table->foreignId('shift_type_id')->nullable()->constrained('shift_types')->onDelete('set null');
+            
         });
     }
 

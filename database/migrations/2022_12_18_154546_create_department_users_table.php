@@ -15,12 +15,20 @@ class CreateDepartmentUsersTable extends Migration
     {
         Schema::create('department_users', function (Blueprint $table) {
             $table->id();
-            $table->integer('department_id');
-            $table->bigInteger('user_id')->unsigned()->index();
+
+            // Postgresql
+            // $table->integer('department_id');
+            // $table->bigInteger('user_id')->unsigned()->index();
             $table->jsonb('properties')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('department_id')->references('id')->on('departments');
+
+            // Postgresql
+            // $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('department_id')->references('id')->on('departments');
+
+            // Mysql
+            $table->foreignId('user_id')->nullable()->consrained('users')->onDelete('set null');
+            $table->foreignId('department_id')->nullable()->consrained('departments')->onDelete('set null');
         });
     }
 
