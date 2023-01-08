@@ -29,6 +29,7 @@ class DefaultDepartmentUserSeeder extends Seeder
              ,'is_shift'=>true
              ,'description'=>'Default department']
         );
+
         foreach ($users as $item) {
             $user = User::where('email', $item[0])->first();
             if ($user!=null) {
@@ -40,5 +41,13 @@ class DefaultDepartmentUserSeeder extends Seeder
                 );
             }
         }
+
+        $outlet01 = Department::create(
+            ['code'=>'001'
+             ,'name'=>'Outlet 001'
+             ,'is_shift'=>true
+             ,'description'=>'Default outlet'
+             ,'manager_id'=>'3']
+        );
     }
 }

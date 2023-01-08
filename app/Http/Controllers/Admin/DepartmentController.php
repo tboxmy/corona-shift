@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Department;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -47,10 +48,6 @@ class DepartmentController extends Controller
     public function show(Request $request, $id)
     {
         //
-        $department = Department::find($id);
-        $data = ['back'=>$request->prev??"/"];
-        // dd($department);
-        return view('departments.show', compact('department', 'data'));
     }
 
     /**
@@ -85,5 +82,33 @@ class DepartmentController extends Controller
     public function destroy(Department $department)
     {
         //
+    }
+
+    public function getDepartments(Request $request)
+    {
+        //
+        $depts = new Department();
+        $length = $request->length??10;
+        $start = $request->start??0;
+        $orderColumn = "name";
+        $recordsTotal = clone $depts;
+        $recordsTotal = $recordsTotal->count();
+        if ($request->has('search')) {
+            $searchWord = $request->search;
+            $depts = $depts->where('name', 'Like', '%' . $searchWord . '%');
+        }
+        $recordsFiltered = clone $depts;
+        $recordsFiltered = $recordsFiltered->count();
+        $depts = $depts->with('managedBy')->orderBy($orderColumn, 'ASC')->offset($start)->limit($length);
+        $depts = $depts->get();
+        $data = [
+            'start'=>$start,
+            'length'=>$length,
+            'recordsTotal'=>$recordsTotal,
+            'recordsFiltered'=>$recordsFiltered,
+            'data'=>$depts,
+        ];
+        // return response($data, 200);
+        return view('admin.department.index', compact('data'));
     }
 }

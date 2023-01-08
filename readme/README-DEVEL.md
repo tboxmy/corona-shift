@@ -120,4 +120,9 @@ npm run dev
 
 ## Syntax hightlights
 
--   [Markdown](README-markdown)
+-   [Markdown](README-markdown) Display preview with Ctrl+Shift v
+
+## Laravel relationships references
+
+-   [belongsto](https://vegibit.com/laravel-hasmany-and-belongsto-tutorial/)
+-   [relationships ont-to-one examples](https://ralphjsmit.com/laravel-eloquent-relationships#one-to-one-eloquent-relationship)

@@ -14,4 +14,8 @@ class UserProfile extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+    public function departments()
+    {
+        return $this->belongsToMany('App\Models\Department', 'department_users', 'user_id', 'department_id');
+    }
 }

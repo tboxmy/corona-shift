@@ -21,10 +21,12 @@ class CreateDepartmentsTable extends Migration
             $table->string('region')->nullable();
             $table->boolean('is_shift')->default(false);
             $table->boolean('is_active')->default(false);
+            $table->bigInteger('manager_id')->unsigned()->index()->nullable();
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
             $table->jsonb('properties')->nullable();
             $table->timestamps();
+            $table->foreign('manager_id')->references('id')->on('users');
         });
     }
 

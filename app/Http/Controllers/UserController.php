@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\UserProfile;
-use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -84,9 +83,9 @@ class UserController extends Controller
     public function show(Request $request, $id)
     {
         //
-        $user = User::find($id);
-
-        return view('users.show', compact('user'));
+        $profile = UserProfile::with(['user','departments'])->find($id);
+        $data = ['back'=>$request->prev??"/"];
+        return view('users.show', compact('profile', 'data'));
     }
 
     /**
