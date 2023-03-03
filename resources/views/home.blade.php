@@ -20,6 +20,8 @@
     </div>
     <div class="row justify-content-center">
     @include('widgets.todayRow')
+    @include('widgets.defaultList')
+
     </div>
     <div class="row">
         <div class="col-3 ">
@@ -39,7 +41,7 @@
     
 </div>
 <script>
-    $('#datepicker').datepicker({
+    $}('#datepicker').datepicker({
         uiLibrary: 'bootstrap5',
         format: 'dd/mm/yyyy',
     }).on("change",function(){

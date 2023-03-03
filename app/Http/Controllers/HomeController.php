@@ -28,18 +28,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $today = Carbon::now();
+        $today = Carbon::now()->timezone('Asia/Kuala_Lumpur');
         $user = Auth::user();
         if ($user==null) {
             dd('Not authenticated');
         }
+        Log::debug($today);
         $shifts = ShiftUser::where('user_id', $user->id)
         ->where('start', '>=', $today->startOfDay())->get();
         $shiftTodayRow = ShiftUser::where('user_id', $user->id)
-        ->whereDate('start', '=', $today->startOfDay())->orderBy('created_at', 'DESC')->get();
+        ->whereDate('start', $today)->orderBy('created_at', 'DESC')->get();
         $shiftToday = [];
+        Log::debug($shiftTodayRow);
         foreach ($shiftTodayRow as $row) {
             //
+
             $data = null;
             $data['date']=Carbon::parse($row->start)->format("d-m-Y");
             $data['timeStart']=Carbon::parse($row->start)->format("h:i A");
@@ -48,23 +51,28 @@ class HomeController extends Controller
             } else {
                 $data['timeEnd']=Carbon::parse($row->end)->format("h:i A (d-m)");
             }
+            $data['description']=$row->description??null;
+            $data['clock_in']=$row->clockin_at??null;
+            $data['clock_out']=$row->clockout_at??null;
             $xount = array_push($shiftToday, $data);
         }
         $shiftUpcomingRow = ShiftUser::where('user_id', $user->id)
-        ->whereDate('start', '>', $today->startOfDay())->orderBy('created_at', 'DESC')->first();
+        ->whereDate('start', '>', $today->startOfDay())->orderBy('created_at', 'DESC')->get();
         $shiftUpcoming = [];
         if ($shiftUpcomingRow != null) {
             $row=$shiftUpcomingRow;
-            //
-            $data = null;
-            $data['date']=Carbon::parse($row->start)->format("d-m-Y");
-            $data['timeStart']=Carbon::parse($row->start)->format("h:i A");
-            if (Carbon::parse($row->start)->diffInDays($row->end) == 0) {
-                $data['timeEnd']=Carbon::parse($row->end)->format("h:i A");
-            } else {
-                $data['timeEnd']=Carbon::parse($row->end)->format("h:i A (d-m)");
+            foreach ($shiftUpcomingRow as $row) {
+                $data = null;
+                $data['date']=Carbon::parse($row->start)->format("d-m-Y");
+                $data['timeStart']=Carbon::parse($row->start)->format("h:i A");
+                if (Carbon::parse($row->start)->diffInDays($row->end) == 0) {
+                    $data['timeEnd']=Carbon::parse($row->end)->format("h:i A");
+                } else {
+                    $data['timeEnd']=Carbon::parse($row->end)->format("h:i A (d-m)");
+                }
+                $data['description']=$row->description??null;
+                $xcount = array_push($shiftUpcoming, $data);
             }
-            $xcount = array_push($shiftUpcoming, $data);
         }
 
         return view('home', compact('shiftToday', 'shiftUpcoming', 'shifts', 'user'));

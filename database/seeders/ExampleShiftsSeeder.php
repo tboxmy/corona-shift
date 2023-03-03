@@ -28,7 +28,10 @@ class ExampleShiftsSeeder extends Seeder
         $shiftType = ShiftType::where('name', '9HRS')->first();
         $end->addMinutes($shiftType->duration);
         $shifts = [[$shiftType->name, 'Demo '.$shiftType->name, $shiftType->id, null, $shiftType, 'user01']
-        , [$shiftType->name, 'Demo '.$shiftType->name, $shiftType->id, null, $shiftType, 'user01']
+        , [$shiftType->name, 'Demo1 '.$shiftType->name, $shiftType->id, null, $shiftType, 'user01']
+        , [$shiftType->name, 'Demo2 '.$shiftType->name, $shiftType->id, null, $shiftType, 'user01']
+        , [$shiftType->name, 'Demo3 '.$shiftType->name, $shiftType->id, null, $shiftType, 'user01']
+        , [$shiftType->name, 'Demo4 '.$shiftType->name, $shiftType->id, null, $shiftType, 'user01']
         , [$shiftType->name, 'Demo '.$shiftType->name, $shiftType->id, null, $shiftType, 'user02']
         ];
         $planner = User::where('name', 'planner')->first();
